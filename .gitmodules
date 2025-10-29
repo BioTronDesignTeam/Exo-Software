@@ -1,3 +1,6 @@
 [submodule "esp32-stepper-motor"]
 	path = esp32-stepper-motor
 	url = https://github.com/sarahyoo011725/esp32-stepper-motor.git
+[submodule "gui"]
+	path = gui
+	url = https://github.com/LucasHJin/Exo-GUI.git
