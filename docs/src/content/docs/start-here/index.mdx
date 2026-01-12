@@ -4,4 +4,36 @@ description: Welcome to the BioTron Docs
 sidebar:
   order: 1
 ---
-WIP
+Welcome to the Exo Software Docs! Here you will find all codebase-related documentation.
+
+## About the team
+UW Exo is a student design team at the University of Waterloo participating in the Applied Collegiate Exoskeleton Competition (ACE) - a competition held every year and involving a dozen universities from across the world. 
+Teams design a powered exoskeleton, primarily focused on lower-body mobility.
+Teams develop exoskeleton with unique missions and payload requirements and are evaluated through a series of launch-readiness tests, including design review, safety test, judge piloting test, and mobility challenges. 
+
+- Find more about the ACE competition [here](https://starx.engin.umich.edu/ace-competition/about-ace-2025).
+- The 2026 competition requirement is [here](https://www.acecompetition.ca/rulebook).
+
+## What software does
+Software is a subteam consisting of three major code projects: control app, firmware, and motion simulation.
+
+The control app provides the primary interface between the operator and the exoskeleton. 
+It includes frontends that allow operators to monitor system status and command high-level exoskeleton states such as idle, walking, calibration, and emergency stop. 
+The app also manages configuration and calibration data, including motor PID constants, joint limits, and safety thresholds to ensure consistent behavior across hardware iterations. 
+The control app is primarily built with Python for backend and React for the frontend.
+
+The firmware runs on embedded controllers and is responsible for controlling the exoskeleton’s actuators. 
+It coordinates torque, position, and velocity control while continuously reading sensor data such as joint encoders, force/torque sensors, and IMU measurements. 
+The firmware handles communication with the control app and the motion simulation, and interfaces directly with motor drivers and other electrical subsystems. 
+
+The motion simulation tests high-level control logic for the exoskeleton using sensor values from real hardwares or simulated sources such as keyboard inputs.
+It is where the control algorithms including PID control and gait prediction are developed and evaluated before deployment to the physical system, and it is built using ROS2.
+
+## Suggested guides
+Don’t know where to go first? Try one of the following links!
+- initial setup
+- building firmware
+- building control app
+- building simulation
+- style guide
+- how to make pull request
