@@ -41,12 +41,12 @@ export default defineConfig({
           autogenerate: { directory: 'firmware' },
         },
         {
-          label: 'ROS simulation',
-          autogenerate: { directory: 'ros-simulation' },
+          label: 'ROS',
+          autogenerate: { directory: 'ros' },
         },
         {
-          label: 'Control app',
-          autogenerate: { directory: 'control-app' },
+          label: 'User interface',
+          autogenerate: { directory: 'user-interface' },
         },
       ],
     }),
