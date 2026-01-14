@@ -4,6 +4,9 @@ description: Guid to setting up required software development
 sidebar:
   order: 2
 ---
+import { Steps } from '@astrojs/starlight/components';
+import { LinkCard } from '@astrojs/starlight/components';
+
 This guide walks you through the process of setting up your development environment.
 
 ## Windows
@@ -28,15 +31,22 @@ You can also work with WSL in VS Code. To open VS Code in WSL, install the WSL e
 
 ## Linux/WSL
 ### Standard Setup
-1. Ensure you have Git installed. 
-  If you are using Ubuntu 24.04 LTS or later, or installed the default WSL distribution, you should already have it installed. 
-  If not, open a terminal and run the following commands to install Git:
+<Steps>
 
-  ```bash
-  sudo apt update
-  sudo apt install git
-  ```
-2. Run the following command in a directory of your choice to clone the repository:
-```bash
-git clone https://github.com/BioTronDesignTeam/Exo-Software.git
-```
+1. Ensure you have Git installed. If you are using Ubuntu 24.04 LTS or later, or installed the default WSL distribution, you should already have it installed. If not, open a terminal and run the following commands to install Git:
+
+    ```bash
+    sudo apt update
+    sudo apt install git
+    ```
+
+2. Run the following command in a directory of your choice to clone the repository and change directory:
+    ```bash
+    git clone https://github.com/BioTronDesignTeam/Exo-Software.git
+    cd Exo-Software
+    ```
+3. Refer to the respective guides depending on the folder you want to build!
+    <LinkCard title="firmware/" href="/Exo-Software/firmware/" />
+    <LinkCard title="user-interface/" href="/Exo-Software/control-app/" />
+    <LinkCard title="ros-ws/" href="/Exo-Software/ros-simulation/" />
+</Steps>
