@@ -36,6 +36,18 @@ export default defineConfig({
           label: 'Start Here',
           autogenerate: { directory: 'start-here' },
         },
+        {
+          label: 'Firmware',
+          autogenerate: { directory: 'firmware' },
+        },
+        {
+          label: 'ROS simulation',
+          autogenerate: { directory: 'ros-simulation' },
+        },
+        {
+          label: 'Control app',
+          autogenerate: { directory: 'control-app' },
+        },
       ],
     }),
   ],
