@@ -22,23 +22,23 @@ Teams develop exoskeleton with unique missions and payload requirements and are 
 - The 2026 competition requirement is [here](https://www.acecompetition.ca/rulebook).
 
 ## What software does
-Software is a subteam consisting of three major code projects: control app, firmware, and motion simulation.
+Software is a subteam consisting of three major code projects: user interface, firmware, and robot operating system (ROS).
 
-The control app provides the primary interface between the operator and the exoskeleton. 
-It includes frontends that allow operators to monitor system status and command high-level exoskeleton states such as idle, walking, calibration, and emergency stop. 
-The app also manages configuration and calibration data, including motor PID constants, joint limits, and safety thresholds to ensure consistent behavior across hardware iterations. 
-The control app is primarily built with Python for backend and React for the frontend.
+The user interface is the operator’s control stage for the exoskeleton. 
+It lets users monitor system status and command high-level states (idle, walking, emergency stop) 
+and manage configuration and calibration data, such as motor PID constants, joint limits, and safety thresholds, in real time. 
+The app is built with Python for the backend and React for the frontend.
 
-The firmware runs on embedded controllers and is responsible for controlling the exoskeleton’s actuators. 
-It coordinates torque, position, and velocity control while continuously reading sensor data such as joint encoders, force/torque sensors, and IMU measurements. 
-The firmware handles communication with the control app and the motion simulation, and interfaces directly with motor drivers and other electrical subsystems. 
+The firmware runs on the microcontroller(MCU) and directly controls the actuators. 
+It manages torque, position, and velocity control while continuously reading sensor data. 
+It also handles communication with the user interface, robot operating sytem, motor drivers, and other electrical subsystems. 
 
-The motion simulation tests high-level control logic for the exoskeleton using sensor values from real hardwares or simulated sources such as keyboard inputs.
-It is where the control algorithms including PID control and gait prediction are developed and evaluated before deployment to the physical system, and it is built using ROS2.
+ROS runs the high-level control logic for the exoskeleton, using sensor data from real hardwares or simulated sources (e.g., keyboard inputs).
+It is where the PID control and gait prediction algorithms are implemented, and the processed outputs are deployed to either the physical system or the simulation. 
 
 ## Suggested guides
 Don’t know where to go first? Try one of the following links!
 <LinkCard title="Initial setup" href="/Exo-Software/start-here/initial-setup/" />
 <LinkCard title="Building Firmware" href="/Exo-Software/firmware/" />
-<LinkCard title="Building the Control App" href="/Exo-Software/control-app/" />
-<LinkCard title="ROS Simulation" href="/Exo-Software/ros-simulation/" />
+<LinkCard title="Building User Interface" href="/Exo-Software/user-interface/" />
+<LinkCard title="Building ROS" href="/Exo-Software/ros/" />
