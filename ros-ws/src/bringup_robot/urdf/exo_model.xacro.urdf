@@ -1,0 +1,146 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="exo_model">
+    <!-- materials -->
+     <material name="black">
+       <color rgba="0.0 0.0 0.0 1.0"/> 
+     </material>
+    <material name="grey">
+       <color rgba="0.7 0.7 0.7 1.0"/> 
+    </material>
+
+    <!-- visual & physics properties -->
+    <xacro:property name="motor_radius" value="0.2" /> <!-- meter -->
+    <xacro:property name="motor_thickness" value="0.15" /> 
+
+    <xacro:property name="base_bar_length" value="1.0" />
+    <xacro:property name="thigh_stand_length" value="0.5" />
+    <xacro:property name="shin_stand_length" value="0.7" /> 
+
+    <xacro:property name="motor_mass" value="0.3" /> <!-- kg -->
+    <xacro:property name="thigh_stand_mass" value="1.0" />
+    <xacro:property name="shin_stand_mass" value="1.2" />
+    
+    <!-- macros -->
+    <xacro:macro name="motor" params="name">
+        <link name="${name}_motor_link">
+            <visual>
+               <geometry>
+                    <cylinder radius="${motor_radius}" length="${motor_thickness}"/>
+               </geometry> 
+               <origin xyz="0 0 0" rpy="1.57 0 0"/> <!-- 90 degree is 1.57 rad -->
+               <material name="black"/>
+            </visual>
+
+            <collision>
+                <geometry>
+                    <cylinder radius="${motor_radius}" length="${motor_thickness}"/>
+                </geometry>
+                <origin xyz="0 0 0" rpy="1.57 0 0"/>
+            </collision>
+
+            <!-- approximated inertia -->
+            <inertial>
+                <origin xyz="0 0 0"/>
+                <mass value="${motor_mass}"/>
+                <inertia ixx="0.002" iyy="0.002" izz="0.002"
+                        ixy="0" ixz="0" iyz="0"/>
+            </inertial>
+        </link>
+    </xacro:macro>
+
+    <xacro:macro name="stand" params="name length mass">
+        <link name="${name}_stand_link">
+            <visual>
+               <geometry>
+                    <box size="0.2 0.2 ${length}"/> 
+               </geometry> 
+                <origin xyz="0 0 -${length/2}"/>
+               <material name="grey"/>
+            </visual>
+            <mass value="${mass}"/>
+        </link>
+
+        <collision>
+            <geometry>
+                <box size="0.2 0.2 ${length}"/>
+            </geometry>
+            <origin xyz="0 0 -${length/2}"/>
+        </collision>
+
+        <inertial>
+            <origin xyz="0 0 -${length/2}"/>
+            <mass value="${mass}"/>
+            <inertia
+                ixx="${(mass/12.0) * (0.4*0.4 + length*length)}"
+                iyy="${(mass/12.0) * (0.2*0.2 + length*length)}"
+                izz="${(mass/12.0) * (0.2*0.2 + 0.4*0.4)}"
+                ixy="0" ixz="0" iyz="0"/>
+        </inertial>
+
+    </xacro:macro>
+
+
+    <link name="dummy_link">
+        <collision>
+            <geometry>
+                <box size="0.2 ${base_bar_length} 0.2"/> 
+            </geometry>
+        </collision>
+    </link>
+
+    <link name="base_link">
+        <visual>
+            <geometry>
+                <box size="0.2 ${base_bar_length} 0.2"/> 
+            </geometry> 
+        </visual>
+    </link>
+
+    <joint name="base_fixedpoint" type="fixed">
+        <parent link="base_link"/>
+        <child link="dummy_link"/>
+    </joint>
+
+    <!-- create an entire exo leg -->
+    <xacro:macro name="exo_leg" params="side mount_y">
+        <xacro:motor name="${side}_hip" />
+        <xacro:stand name="${side}_thigh" length="${thigh_stand_length}" mass="${thigh_stand_mass}"/>
+        <xacro:motor name="${side}_knee"/>
+        <xacro:stand name="${side}_shin" length="${shin_stand_length}" mass="${shin_stand_mass}"/>
+
+        <!-- joints setting -->
+        <joint name="${side}_hip_joint" type="revolute">
+            <parent link="base_link"/>
+            <child link="${side}_hip_motor_link"/>
+            <origin xyz="0 ${mount_y} 0"/> 
+            <axis xyz="0 1 0"/>
+            <limit lower="-1.5" upper="1.5" effort="60" velocity="3.0"/>
+        </joint>
+        <joint name="${side}_hip_motor_to_thigh" type="fixed">
+            <parent link="${side}_hip_motor_link"/>
+            <child link="${side}_thigh_stand_link"/>
+            <origin xyz="0 0 -${motor_radius}"/>
+        </joint>
+        <joint name="${side}_thigh_to_knee_motor" type="fixed">
+            <parent link="${side}_thigh_stand_link"/>
+            <child link="${side}_knee_motor_link"/>
+            <origin xyz="0 0 -${thigh_stand_length + motor_radius}"/>
+        </joint>
+        <joint name="${side}_knee_joint" type="revolute">
+            <parent link="${side}_knee_motor_link"/>
+            <child link="${side}_shin_stand_link"/>
+            <origin xyz="0 0 0"/> 
+            <axis xyz="0 1 0"/>
+            <limit lower="-2.5" upper="0.0" effort="40" velocity="3.0"/>
+        </joint>
+        <joint name="${side}_knee_motor_to_shin" type="fixed">
+            <parent link="${side}_knee_motor_link"/>
+            <child link="${side}_shin_stand_link"/>
+            <origin xyz="0 0 -${motor_radius}"/>
+        </joint>
+    </xacro:macro>
+
+
+    <xacro:exo_leg side="left" mount_y="-${base_bar_length / 2 + 0.05}"/>
+    <xacro:exo_leg side="right" mount_y="${base_bar_length / 2 + 0.05}"/>
+</robot>
