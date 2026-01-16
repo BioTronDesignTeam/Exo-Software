@@ -1,0 +1,87 @@
+---
+title: Important ROS commands 
+description: Guide to ROS2 setup 
+sidebar:
+  order: 2
+---
+The following commands are the ones you will use most often during ROS 2 development.
+
+For a full list of ROS 2 CLI commands, see the official documentation: [ROS 2 CLI Tools](https://docs.ros.org/en/rolling/Tutorials/Beginner-CLI-Tools.html)
+
+:::tip[Tip]
+If a command does not work as expected, check:
+- Whether the correct environment is sourced
+- Whether the node or service is actually running
+- The exact topic, service, or action names using list commands
+:::
+
+## Build
+- ```source /opt/ros/kilted/setup.bash```
+  
+  Loads the system-wide ROS 2 environment so ROS commands are available.
+
+- ```source install/setup.bash```
+  
+  Loads your local workspace so ROS can find packages you built.
+
+- ```colcon build```
+  
+  Builds all packages in the current ROS 2 workspace.
+
+- ```colcon build --packages-select <package_name>```
+
+  Builds only the specified package to save time.
+
+- ```ros2 run <package> <executable>```
+  
+  Runs a specific node (executable) from a ROS 2 package. (e.g, use it to run a launch.py file)
+
+## Topic
+- ```ros2 topic list```
+  
+  Lists all currently active topics in the ROS 2 system.
+
+- ```ros2 topic echo <topic name>```
+
+  Prints messages being published on a topic to the terminal.
+
+- ```ros2 interface show <topic_name>```
+  
+  Displays the structure of a message type used by a topic.
+
+## Service
+- ```ros2 service list```
+  
+  Lists all available services.
+
+- ```ros2 service echo <service_name | service_type> ```
+
+  see data communication between a service client and a service server.
+
+- ```ros2 interface show <type_name>```
+
+  Shows the request and response fields of a service type. 
+
+## Action
+- ```ros2 action list```
+
+  Lists all active action servers in the system.
+
+- ```ros2 action info <action_name>```
+ 
+  Shows details about a specific action, including its type and goal/result topics.
+
+
+## Visualization 
+
+- ```ros2 run tf2_tools view_frames```
+
+  Generates a visualization of the transformation frame tree in PDF.
+
+## Control
+- ```ros2 run teleop_twist_keyboard teleop_twist_keyboard```
+
+  Controls a robot using keyboard input by publishing velocity commands.
+
+Or you can run keyboard teleoperation with a remapped velocity topic using ``--remap`` flag:
+- ```ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args --remap cmd_vel:=<your cmd_vel name>```
