@@ -1,0 +1,97 @@
+---
+title: Essential Git tutorial 
+description: Welcome to the BioTron Docs
+sidebar:
+  order: 4
+---
+This guide explains the most common Git actions you’ll use when working on BioTron projects.
+Git helps multiple people work on the same codebase without overwriting each other’s work.
+
+If Git is not installed on your PC, please follow this installation guide: [Initial setup](/Exo-Software/start-here/initial-setup/)
+
+If you don’t have access to the [Exo-Software repository](https://github.com/BioTronDesignTeam/Exo-Software) yet, 
+request access by pinging ```@Sarah``` on Discord.
+
+## 1. Check repository status
+Before doing anything, it’s always good to see what Git thinks has changed.
+```bash
+git status
+```
+```git status``` shows which files were modified, which are staged, and which are untracked.
+
+## 2. Stage changes
+Staging means telling Git which changes you want to include in your next commit.
+
+### Stage a specific file
+```bash
+git add filename
+```
+
+### Stage all changes
+```bash
+git add .
+```
+```git add``` moves files into the staging area, preparing them to be saved as a commit.
+
+## 3. Commit changes
+A commit is a snapshot of your staged changes with a message explaining what you did.
+```bash
+git commit -m "Add motor control logic"
+```
+```git commit``` saves your staged changes to your local Git history.
+Please write clear, concise commit messages that explain why you made the change!
+
+## 4. Push changes to the remote repository
+Pushing sends your local commits to the remote repository (e.g., GitHub).
+```bash
+git push
+```
+
+If it’s your first push on a new branch:
+```bash
+git push -u origin branch-name
+```
+
+```git push``` uploads your commits so others can see and use them.
+
+
+## 5. Create a new branch (sub-branching)
+Branches let you work on features or fixes without affecting the main code.
+
+### Create and switch to a new branch
+```bash
+git checkout -b feature-name
+```
+
+### Switch between branches
+```bash
+git checkout branch-name
+```
+
+```git branch``` or ```git checkout -b``` creates an isolated workspace for your changes.
+
+**Best practice**: always create a new branch for new features or bug fixes!
+
+## 6. Pull latest changes
+Before starting work (or before pushing), always pull the latest updates.
+```bash
+git pull
+```
+```git pull``` downloads and merges changes from the remote repository into your local branch.
+
+## 7. Open a pull request (PR)
+A pull request lets others review your changes before merging them into the main git branch.
+
+Typical workflow:
+- Create a new branch
+- Make changes
+- Stage and commit
+- Push your branch
+- Open a pull request on GitHub
+
+After opening a Pull Request on GitHub, notify the software lead on Discord so it gets reviewed:
+1. Go to the *Exo Pull Request thread* on Discord
+2. Post a short message describing your PR
+3. Ping ```@Sarah``` to request review
+
+This prevents accidental breaking changes.
