@@ -7,6 +7,27 @@ sidebar:
     text: WIP
     variant: caution
 ---
+import { Steps } from '@astrojs/starlight/components';
+
 We are still waiting for STM32H7 board to arrive.
 
-## Install STM32CubeIDE
+## Software Pre-requisites
+### Installing STM32CubeIDE
+This is the main **IDE** that is used to edit STM specific code. You can use other software like `VSCode` or `Neovim` but you will have to set up the development environment on your own (thankfully, there are some resources online).
+
+<Steps>
+1. Create a myST account (STM account on their website).
+2. Get the latest version for your operating system using the link: [https://www.st.com/en/development-tools/stm32cubeide.html](https://www.st.com/en/development-tools/stm32cubeide.html)
+</Steps>
+
+### Installing STM32CubeMX
+This software is responsible for **file generation** of project files, HAL, etc. It is a great tool wrapped in an easy-to-use GUI and is a must have when developing with STM boards.
+<Steps>
+1. Create a myST account (STM account on their website).
+2. Get the latest version for your operating system using the link: [https://www.st.com/en/development-tools/stm32cubemx.html](https://www.st.com/en/development-tools/stm32cubemx.html)
+</Steps>
+
+## Building the Repo
+WIP
+
+
