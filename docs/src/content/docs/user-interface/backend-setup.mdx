@@ -8,5 +8,62 @@ sidebar:
     variant: caution
 ---
 ## Install Python
+Install Python 3.10 or newer from the official website:
 
-## Create virtual environment
+Verify the installation:
+```bash
+python --version
+```
+or on some systems,
+```bash
+python3 --version
+```
+If a version number is displayed, Python is installed correctly.
+
+## Create and activate a virtual environment
+A virtual environment keeps backend dependencies isolated.
+
+Navigate to the backend directory and create a virtual environment:
+```bash
+cd Exo-Software/user-interface/backend
+python -m venv venv
+```
+
+Activate the virtual environment:
+### Windows
+```bash
+venv\Scripts\activate
+```
+### macOS/Linux
+```bash
+source venv/bin/activate
+```
+
+## Install required dependencies
+```bash
+pip install --upgrade pip
+pip install -r requirements.txt
+```
+The requirements.txt file includes all dependencies needed for our app (e.g, websockets) 
+
+## Run the websocket server
+Open a terminal in VS Code or your system terminal, navigate to the backend directory, and start the WebSocket server:
+```bash
+python main.py
+```
+
+## Verify the websocket server
+If the server starts successfully, the terminal will show that it is listening for connections.
+
+You can verify the connection by:
+- Opening the frontend application
+- Using a WebSocket client (e.g., browser dev tools or wscat)
+- Checking backend logs for incoming connections in a terminal
+
+## Stop and deactivate
+Stop the server with ```Ctrl + C```.
+
+Deactivate the virtual environment when finished:
+```bash
+deactivate
+```
