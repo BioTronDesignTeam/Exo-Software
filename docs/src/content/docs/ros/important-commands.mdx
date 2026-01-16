@@ -71,6 +71,12 @@ If a command does not work as expected, check:
  
   Shows details about a specific action, including its type and goal/result topics.
 
+:::note[Note]
+**Topics vs Services vs Actions**
+- use Topics for streaming sensor or state data
+- use Services for requests that expect quick replies (i.e. get motor velocity/position/torque)
+- use Actions for tasks that require monitoring and cancellation in the middle of operation (i.e, raise an arm)
+:::
 
 ## Visualization 
 
