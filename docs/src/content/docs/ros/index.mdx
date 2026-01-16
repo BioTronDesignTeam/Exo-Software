@@ -7,4 +7,84 @@ sidebar:
     text: WIP
     variant: caution
 ---
+import { Steps } from '@astrojs/starlight/components';
+
 ## Install ROS2
+ROS 2 is supported on Linux, Windows, and macOS.
+For Windows, it’s recommended to use WSL (Windows Subsystem for Linux), since ROS 2 has better support on Linux.
+
+This guide covers ROS 2 installation on Ubuntu 24.04.
+For instructions on other platforms, see the official documentation: [ROS 2 Installation](https://docs.ros.org/en/kilted/Installation.html)
+
+<Steps>
+1. **Set locale**: Make sure you have a locale which supports UTF-8. However, it should be fine if you’re using a different UTF-8 supported locale.
+
+    ```bash
+    locale  # check for UTF-8
+
+    sudo apt update && sudo apt install locales
+    sudo locale-gen en_US en_US.UTF-8
+    sudo update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
+    export LANG=en_US.UTF-8
+
+    locale  # verify settings
+    ```
+2. Enable required repositories:
+    ```bash
+    # Enable Ubuntu Universe repository.
+    sudo apt install software-properties-common
+    sudo add-apt-repository universe
+
+    # Install the ros2-apt-source package to configure ROS 2 repositories for your system. 
+    sudo apt update && sudo apt install curl -y
+    export ROS_APT_SOURCE_VERSION=$(curl -s https://api.github.com/repos/ros-infrastructure/ros-apt-source/releases/latest | grep -F "tag_name" | awk -F\" '{print $4}')
+    curl -L -o /tmp/ros2-apt-source.deb "https://github.com/ros-infrastructure/ros-apt-source/releases/download/${ROS_APT_SOURCE_VERSION}/ros2-apt-source_${ROS_APT_SOURCE_VERSION}.$(. /etc/os-release && echo ${UBUNTU_CODENAME:-${VERSION_CODENAME}})_all.deb"
+    sudo dpkg -i /tmp/ros2-apt-source.deb
+    ```
+
+3. Install development tools:
+    ``` bash
+    sudo apt update && sudo apt install -y \
+    python3-mypy \
+    python3-pip \
+    python3-pytest \
+    python3-pytest-cov \
+    python3-pytest-mock \
+    python3-pytest-repeat \
+    python3-pytest-rerunfailures \
+    python3-pytest-runner \
+    python3-pytest-timeout \
+    ros-dev-tools
+    ```
+</Steps>
+
+## Build ROS 2
+<Steps>
+1. Install dependencies using rosdep. ROS 2 packages are built on frequently updated Ubuntu systems. It is always recommended to ensure your system is up to date before installing new packages.
+    ```bash
+    sudo apt upgrade
+    sudo rosdep init
+    rosdep update
+    rosdep install --from-paths src --ignore-src -y --skip-keys "fastcdr rti-connext-dds-7.3.0 urdfdom_headers"
+    ```
+
+2. Build the code in the workspace.
+    ```bash
+    cd Exo-Software/ros-ws/
+    # build all existing packages
+    colcon build --symlink-install  
+
+    # or you can build a specific pakage as follows:
+    #colcon build --symlink-install --packages-select {package name inside src} 
+    ```
+
+3. Example: Launch our exoskeleton model
+    ```bash
+    # Source the ROS 2 environment to set up ROS commands and paths
+    source /opt/ros/kilted/setup.bash
+    # Source the workspace build to make your packages and executables available
+    source install/setup.bash
+    # Launch the RViz configuration from our bringup_robot package
+    ros2 launch bringup_robot rviz.display.py
+    ```
+</Steps>
