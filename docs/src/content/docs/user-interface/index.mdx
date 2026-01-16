@@ -8,3 +8,31 @@ sidebar:
     variant: caution
 ---
 ## Install Node.js
+Install the latest stable version of Node.js from the official website: [Node.js Downloads](https://nodejs.org/en/download/current)
+
+After installation, open a terminal and verify that Node.js is installed correctly:
+```bash
+node --version
+```
+If a version number is displayed, Node.js has been successfully installed.
+
+## Install project dependencies
+Navigate to the frontend directory and install the required dependencies:
+```bash
+cd Exo-Software/user-interface
+# installs all dependencies listed in package.json
+npm install
+# ensures they are updated to compatible versions
+npm update 
+```
+
+## Run the frontend development server
+Start the local development server with:
+```bash
+npm run dev
+```
+This command builds the frontend and launches a local server.
+
+## View the application
+Open the localhost URL printed in the terminal (e.g., http://localhost:5173) in your browser to view the frontend.
+Any code changes will automatically refresh the page.
