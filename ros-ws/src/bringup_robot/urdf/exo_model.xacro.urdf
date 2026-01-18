@@ -140,7 +140,10 @@
         </joint>
     </xacro:macro>
 
-
+    <!-- construct a complete exoskeleton model -->
     <xacro:exo_leg side="left" mount_y="-${base_bar_length / 2 + 0.05}"/>
     <xacro:exo_leg side="right" mount_y="${base_bar_length / 2 + 0.05}"/>
+
+    <!-- import other xacro files -->
+    <xacro:include filename="control_interface.xacro"/>
 </robot>
