@@ -4,6 +4,15 @@ install/
 log/
 .vscode/
 
+# editor folders and files
+.settings/
+/.project
+/.idea
+*.launch
+
+# remove build host
+*build-host*
+
 # dependencies
 *node_modules
 user-interface/.pnp
