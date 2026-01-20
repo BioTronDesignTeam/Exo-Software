@@ -143,4 +143,38 @@
 
     <xacro:exo_leg side="left" mount_y="-${base_bar_length / 2 + 0.05}"/>
     <xacro:exo_leg side="right" mount_y="${base_bar_length / 2 + 0.05}"/>
+
+    <ros2_control name="exo_hardware" type="system">
+        
+        <!-- install plugin! -->
+        <hardware>
+            <plugin>mock_components/GenericSystem</plugin>
+        </hardware>
+
+        <!-- Define interfaces for left_hip_joint -->
+        <joint name="left_hip_joint">
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+        </joint>
+
+        <!-- Define interfaces for right_hip_joint -->
+        <joint name="right_hip_joint">
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+        </joint>
+
+        <!-- Define interfaces for left_knee_joint -->
+        <joint name="left_knee_joint">
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+        </joint>
+
+        <!-- Define interfaces for right_knee_joint -->
+        <joint name="right_knee_joint">
+            <command_interface name="position"/>
+            <state_interface name="position"/>
+        </joint>
+
+      </ros2_control>
+
 </robot>
