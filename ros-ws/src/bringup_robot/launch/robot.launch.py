@@ -1,9 +1,11 @@
 from launch import LaunchDescription
 from launch.substitutions import PathJoinSubstitution, Command, LaunchConfiguration
-from launch.actions import DeclareLaunchArgument
+from launch.actions import DeclareLaunchArgument, RegisterEventHandler
 from launch_ros.actions import Node
 from launch_ros.substitutions import FindPackageShare
 from launch_ros.parameter_descriptions import ParameterValue
+from ament_index_python.packages import get_package_share_directory
+from launch.event_handlers import OnProcessExit
 
 def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time', default=True)
@@ -31,6 +33,16 @@ def generate_launch_description():
         executable='joint_state_publisher',
         output='screen',
     )
+    start_input_mapper = Node(
+        package='input_mapper',
+        executable='input_mapper',
+        output='screen'
+    )
+    start_state_estimator = Node(
+        package='state_estimator',
+        executable='state_estimator',
+        output='screen'
+    )
     start_rviz = Node(
         package='rviz2',
         executable='rviz2',
@@ -47,5 +59,7 @@ def generate_launch_description():
         ),
         start_robot_state_publisher,
         start_joint_state_publisher,
+        start_input_mapper,
+        start_state_estimator,
         start_rviz
     ])

@@ -116,12 +116,12 @@
             <axis xyz="0 1 0"/>
             <limit lower="-1.5" upper="1.5" effort="60" velocity="3.0"/>
         </joint>
-        <joint name="${side}_hip_motor_to_thigh" type="fixed">
+        <joint name="link_${side}_hip_motor_and_thigh" type="fixed">
             <parent link="${side}_hip_motor_link"/>
             <child link="${side}_thigh_stand_link"/>
             <origin xyz="0 0 -${motor_radius}"/>
         </joint>
-        <joint name="${side}_thigh_to_knee_motor" type="fixed">
+        <joint name="link_${side}_thigh_and_knee_motor" type="fixed">
             <parent link="${side}_thigh_stand_link"/>
             <child link="${side}_knee_motor_link"/>
             <origin xyz="0 0 -${thigh_stand_length + motor_radius}"/>
@@ -131,12 +131,7 @@
             <child link="${side}_shin_stand_link"/>
             <origin xyz="0 0 0"/> 
             <axis xyz="0 1 0"/>
-            <limit lower="-2.5" upper="0.0" effort="40" velocity="3.0"/>
-        </joint>
-        <joint name="${side}_knee_motor_to_shin" type="fixed">
-            <parent link="${side}_knee_motor_link"/>
-            <child link="${side}_shin_stand_link"/>
-            <origin xyz="0 0 -${motor_radius}"/>
+            <limit lower="0" upper="1.5" effort="40" velocity="3.0"/>
         </joint>
     </xacro:macro>
 
@@ -145,5 +140,4 @@
     <xacro:exo_leg side="right" mount_y="${base_bar_length / 2 + 0.05}"/>
 
     <!-- import other xacro files -->
-    <xacro:include filename="control_interface.xacro"/>
 </robot>

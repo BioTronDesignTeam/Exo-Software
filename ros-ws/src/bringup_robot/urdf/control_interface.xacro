@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="control_interface">
+    <!-- this file is not used now, as I publish joint states manually. -->
     <ros2_control name="mock_hardware_system" type="system">
         <hardware>
             <plugin>mock_components/GenericSystem</plugin>
@@ -10,10 +11,13 @@
             <param name="position_state_following_offset">0.0</param>
         </hardware>
         
-        <xacro:macro name="motor_control" params="name">
+        <xacro:macro name="motor_control" params="name pos_min pos_max">
             <joint name="${name}" >
                 <!-- sendable states (referenced Odrive CAN protocol) -->
-                <command_interface name="position"/>
+                <command_interface name="position">
+                    <param name="min" value="${pos_min}"/>
+                    <param name="max" value="${pos_max}"/> <!-- radians  -->
+                </command_interface>
                 <command_interface name="velocity"/>
                 <command_interface name="torque"/>
                 <!-- receivable states -->
@@ -23,9 +27,9 @@
             </joint>
         </xacro:macro>
     
-        <xacro:motor_control name="left_hip_joint_motor"/>
-        <xacro:motor_control name="left_knee_joint_motor"/>
-        <xacro:motor_control name="right_hip_joint_motor"/>
-        <xacro:motor_control name="right_knee_joint_motor"/>
+        <xacro:motor_control name="left_hip_joint" pos_min="-1.5" pos_max="1.5"/>
+        <xacro:motor_control name="left_knee_joint" pos_min="0" pos_max="1.5"/>
+        <xacro:motor_control name="right_hip_joint" pos_min="-1.5" pos_max="1.5"/>
+        <xacro:motor_control name="right_knee_joint" pos_min="0" pos_max="1.5"/>
     </ros2_control>
 </robot>
