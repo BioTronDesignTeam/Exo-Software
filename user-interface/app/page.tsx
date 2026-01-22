@@ -1,4 +1,4 @@
-import { BatteryStatus, Header, EmergencyStop } from "./components";
+import { BatteryStatus, Header, EmergencyStop, ParameterTuning} from "./components";
 import Dropdown from "./components/Dropdown";
 
 export default function Home() {
@@ -8,6 +8,7 @@ export default function Home() {
       <main className="bg-blue-950 h-screen p-8">
         <BatteryStatus />
         <EmergencyStop />
+        <ParameterTuning />
       </main>
     </div>
   );

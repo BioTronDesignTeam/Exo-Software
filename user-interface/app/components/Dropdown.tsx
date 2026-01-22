@@ -11,7 +11,7 @@ const Dropdown = ({ title, icon, children }: DropdownProps) => {
   const [open, setOpen] = useState(false)
 
   return (
-    <div className="w-[320px] bg-gray-800 p-4 shadow-lg">
+    <div className="w-[100%] bg-gray-800 p-4">
       {/* Header */}
       <button
         onClick={() => setOpen(!open)}
