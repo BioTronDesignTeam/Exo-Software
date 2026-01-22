@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>mujoco_ros2_control</name>
+  <version>0.0.0</version>
+  <description>ros2_control wrapper for the Mujoco Simulate application</description>
+  <maintainer email="nathan.b.dunkelberger@nasa.gov">Nathan Dunkelberger</maintainer>
+  <maintainer email="erik.holum@nasa.gov">Erik Holum</maintainer>
+  <license>Apache License, Version 2.0</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <build_depend>ros2_control_cmake</build_depend>
+
+  <depend>backward_ros</depend>
+  <depend>control_toolbox</depend>
+  <depend>controller_manager</depend>
+  <depend>hardware_interface</depend>
+  <depend>nav_msgs</depend>
+  <depend>libglfw3-dev</depend>
+  <depend>pluginlib</depend>
+  <depend>python3-pykdl</depend>
+  <depend>rclcpp_lifecycle</depend>
+  <depend>rclcpp</depend>
+  <depend>sensor_msgs</depend>
+  <depend>transmission_interface</depend>
+
+  <test_depend>ament_cmake_gtest</test_depend>
+  <test_depend>launch_testing_ament_cmake</test_depend>
+  <test_depend>joint_state_broadcaster</test_depend>
+  <test_depend>robot_state_publisher</test_depend>
+  <test_depend>position_controllers</test_depend>
+  <test_depend>rviz2</test_depend>
+  <test_depend>urdfdom</test_depend>
+  <test_depend>urdfdom_py</test_depend>
+  <test_depend>xacro</test_depend>
+
+  <exec_depend>python3-venv</exec_depend>
+  <exec_depend>python3-pip</exec_depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
