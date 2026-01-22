@@ -1,0 +1,9 @@
+<library path="exo_controller">
+  <class name="exo_controller/ExoController"
+         type="exo_controller::ExoController"
+         base_class_type="controller_interface::ControllerInterface">
+    <description>
+        a controller for exo
+    </description>
+  </class>
+</library>
