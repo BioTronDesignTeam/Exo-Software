@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css"
 import { PageStateProvider } from "./PageState";
+import { PageUpdateDriver } from "./components/PageUpdateDriver";
+import { WebSocketHost } from "./components/WebSocketHost";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,6 +32,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <PageStateProvider>
+          <PageUpdateDriver/>
+          <WebSocketHost/>
           {children}
         </PageStateProvider>
       </body>
